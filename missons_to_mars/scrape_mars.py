@@ -61,9 +61,9 @@ def scrape():
 
         tables = pd.read_html(target_site)
 
-        # pd.read_html gives us a list of 2 tables, the first one is comparing earth and mars, we want the second one 
-        mars_facts = tables[1]
-        mission_to_mars["facts"] = mars_facts.to_html()
+        # pd.read_html gives us a list of 2 tables, the first one is comparing earth and mars 
+        mars_facts = tables[0]
+        mission_to_mars["facts"] = mars_facts.to_html(index=False, header=False, classes="col table table-striped", table_id="mars_facts", border=5, escape=False)
     
         # Now to get the images of the martian hemispheres
     
@@ -93,10 +93,13 @@ def scrape():
 
         for link in links:
             browser.find_by_css('h3').links.find_by_partial_text(link).click()
-            image_link = browser.links.find_by_text("Original")['href']
+            image_link = browser.links.find_by_text("Sample")['href']
     
+            # All of our links end with the word "Enhanced" which we don't really want in the finished name
+            hemisphere_name = link.replace(" Enhanced", "")
+
             # Then we make a dictionary to hold what we found and append it to the hemisphere_image_urls
-            image_dict = {"title":link, "img_url":image_link}
+            image_dict = {"title":hemisphere_name, "img_url":image_link}
             hemisphere_image_urls.append(image_dict)
     
             time.sleep(1)

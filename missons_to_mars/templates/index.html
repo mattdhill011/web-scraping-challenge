@@ -23,31 +23,51 @@
         <h4 class="news">{{listings.headline}}</h4>
         <small>{{listings.news}}</small>
       </div>
-    </div>
+    </div>    
 
-    <div class="row" id="featured_image">
+    <div class="row">
+      <div class="col-md-8" id="featured_image">
         <h1> Featured Mars Image</h1>
         <img src={{listings.featured}}>
-    </div>
-
-    <div class="row" id="facts">
-      {{listings.facts | safe}}
-    </div>
-    
-    <div class="row" id="hemisphere_images">
-      <h1>Mars Hemisphers</h1>
-      {% for image in listings.image %}
-      <div class="card" style="width: 20rem;">
-        <div class="card-body">
-          <h4 class="card-title">{{image["title"]}}</h4>
-          <p>does this work?</p>
-          <img src={image.img_url}>
-        </div>
       </div>
-      {% endfor %}
+      
+      <div class="col-md-4" id="mars_facts">
+        <h1>Mars Facts</h1>
+        {{listings.facts | safe}}
+      </div>
     </div>
-
   </div>
+
+  <br>
+
+  <div class="container">
+    <div class="row" id="hemisphers">
+      <div class="col-md-12 border border-dark">
+        <h1><center>Mars Hemisphers</center></h1>
+
+        <hr>
+             
+        {% for image in listings.images %}
+          <div class="col-md-3">
+            <img class="card-img-top" src={{image.img_url}} alt={{image.title}} width="100%" height="100%">
+            <div class="card-title">
+              <h5>{{image.title}}</h5>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+
 </body>
 
 </html>

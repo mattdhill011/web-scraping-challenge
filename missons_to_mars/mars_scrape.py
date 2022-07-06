@@ -85,7 +85,8 @@ def scrape():
 
         for link in links:
             browser.find_by_css('h3').links.find_by_partial_text(link).click()
-            image_link = browser.links.find_by_text("Original")['href']
+            image_link = browser.links.find_by_text("Sample")['href']
+            print(image_link)
     
             # Then we make a dictionary to hold what we found and append it to the hemisphere_image_urls
             image_dict = {"title":link, "img_url":image_link}
